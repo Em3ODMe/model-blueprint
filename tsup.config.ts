@@ -7,27 +7,24 @@ const defaultOptions: Options = {
   sourcemap: true,
   splitting: false,
   minify: false,
+  outDir: 'dist',
 };
 
 export default defineConfig([
   {
     ...defaultOptions,
     entry: ['src/index.ts'],
-    outDir: 'dist',
   },
   {
     ...defaultOptions,
     entry: ['src/queryUtils/withCursor.ts'],
-    outDir: 'dist/withCursor',
   },
   {
     ...defaultOptions,
     entry: ['src/queryUtils/createId.ts'],
-    outDir: 'dist/createId',
   },
   {
     ...defaultOptions,
     entry: ['src/queryUtils/dropQuery.ts'],
-    outDir: 'dist/dropQuery',
   },
 ]);

@@ -1,6 +1,6 @@
 {
   "name": "model-blueprint",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,16 +10,16 @@
       "types": "./dist/index.d.ts"
     },
     "./withCursor": {
-      "import": "./dist/withCursor/index.js",
-      "types": "./dist/withCursor/index.d.ts"
+      "import": "./dist/withCursor.js",
+      "types": "./dist/withCursor.d.ts"
     },
     "./createId": {
-      "import": "./dist/createId/index.js",
-      "types": "./dist/createId/index.d.ts"
+      "import": "./dist/createId.js",
+      "types": "./dist/createId.d.ts"
     },
     "./dropQuery": {
-      "import": "./dist/dropQuery/index.js",
-      "types": "./dist/dropQuery/index.d.ts"
+      "import": "./dist/dropQuery.js",
+      "types": "./dist/dropQuery.d.ts"
     }
   },
   "scripts": {
