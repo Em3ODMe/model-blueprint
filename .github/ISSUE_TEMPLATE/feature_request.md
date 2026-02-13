@@ -1,6 +1,6 @@
 ---
 name: 💡 Feature Request
-about: Suggest an idea for hono-utils
+about: Suggest an idea for package
 title: '[FEAT] '
 labels: enhancement
 assignees: ''

@@ -1,10 +1,14 @@
 {
   "name": "model-blueprint",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
     "./withCursor": {
       "import": "./dist/withCursor/index.js",
       "types": "./dist/withCursor/index.d.ts"
@@ -54,10 +58,8 @@
   },
   "devDependencies": {
     "@paralleldrive/cuid2": "^3.3.0",
-    "hono": "^4.11.7",
     "@eslint/js": "^9.0.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
-    "@cloudflare/workers-types": "^4.20260131.0",
     "@typescript-eslint/parser": "^8.0.0",
     "@vitest/coverage-v8": "^4.0.18",
     "eslint": "^9.0.0",

@@ -1,5 +1,4 @@
-import { HTTPException } from 'hono/http-exception';
-import type { ClientErrorStatusCode } from 'hono/utils/http-status';
+import { ModelError } from '@/utils';
 
 /**
  * Middleware factory that adds a `drop` function to the context.
@@ -11,11 +10,8 @@ import type { ClientErrorStatusCode } from 'hono/utils/http-status';
 export const dropQuery =
   <Messages extends Record<string, string>>(dropMessages: Messages) =>
   <TContext>({ ctx }: { ctx: TContext }) => {
-    const drop = <Key extends keyof Messages>(
-      message: Key,
-      code?: ClientErrorStatusCode
-    ) => {
-      throw new HTTPException(code ?? 400, {
+    const drop = <Key extends keyof Messages>(message: Key, code?: number) => {
+      throw new ModelError(code ?? 400, {
         message: dropMessages[message],
       });
     };

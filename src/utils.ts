@@ -2,7 +2,6 @@ import z, { ZodAny } from 'zod';
 import { QUERY_MARKER } from './constant';
 import { QueryBuilder } from './types';
 import { ProcedureBuilder } from './ProcedureBuilder';
-import { HTTPException } from 'hono/http-exception';
 
 /**
  * Type guard to check if a value is a valid `QueryBuilder`.
@@ -55,10 +54,24 @@ export const parseSchema = <TInput extends z.ZodType>(
   const parsed = schema.safeParse(input);
 
   if (!parsed.success) {
-    throw new HTTPException(400, {
+    throw new ModelError(400, {
       message: 'input-not-valid',
     });
   }
 
   return parsed.data;
 };
+
+type ModelErrorOptions = {
+  message?: string;
+};
+
+export class ModelError extends Error {
+  constructor(
+    public readonly status: number,
+    options?: ModelErrorOptions
+  ) {
+    super(options?.message);
+    this.name = 'ModuleError';
+  }
+}
