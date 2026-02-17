@@ -1,5 +1,3 @@
-import { QUERY_MARKER } from './constant';
-
 /**
  * Represents a compiled query function that is waiting for a Context to be injected.
  * @template TContext - The type of the context object (e.g., DB connection, User session) this query requires.
@@ -12,11 +10,6 @@ export type QueryBuilder<TContext, TInput, TOutput> = {
    * @param ctx - The dependency injection context.
    */
   (ctx: TContext): (input: TInput) => Promise<TOutput>;
-  /**
-   * Internal marker to verify this function was created by the library.
-   * @internal
-   */
-  [QUERY_MARKER]: true;
 };
 
 /**

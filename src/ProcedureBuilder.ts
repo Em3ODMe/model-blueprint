@@ -15,12 +15,12 @@ export class ProcedureBuilder<
   TCurrentContext,
   TInput extends z.ZodType,
 > {
-  private readonly _middlewares: ProcedureMiddleware[];
-  private readonly _schema: TInput | undefined;
+  readonly #middlewares: ProcedureMiddleware[];
+  readonly #schema: TInput | undefined;
 
   constructor(schema?: TInput, middlewares: ProcedureMiddleware[] = []) {
-    this._schema = schema;
-    this._middlewares = middlewares;
+    this.#schema = schema;
+    this.#middlewares = middlewares;
   }
   /**
    * Define input validation.
@@ -29,7 +29,7 @@ export class ProcedureBuilder<
   public input<TSchema extends z.ZodType>(schema: TSchema) {
     return new ProcedureBuilder<TRootContext, TCurrentContext, TSchema>(
       schema,
-      this._middlewares
+      this.#middlewares
     );
   }
 
@@ -53,8 +53,8 @@ export class ProcedureBuilder<
     };
 
     return new ProcedureBuilder<TRootContext, TNextContext, TInput>(
-      this._schema,
-      [...this._middlewares, storedMiddleware]
+      this.#schema,
+      [...this.#middlewares, storedMiddleware]
     );
   }
 
@@ -72,16 +72,16 @@ export class ProcedureBuilder<
     const builder = (rootCtx: TRootContext) => {
       return async (rawInput: z.infer<TInput>): Promise<TResult> => {
         // A. Validation
-        if (!this._schema) {
+        if (!this.#schema) {
           throw new Error('No schema provided for query');
         }
-        const validatedInput = parseSchema(this._schema, rawInput);
+        const validatedInput = parseSchema(this.#schema, rawInput);
 
         // B. Middleware Pipeline
         // We start with the Root Context
         let ctxCursor: unknown = rootCtx;
 
-        for (const mw of this._middlewares) {
+        for (const mw of this.#middlewares) {
           ctxCursor = await mw({ ctx: ctxCursor, input: validatedInput });
         }
 
