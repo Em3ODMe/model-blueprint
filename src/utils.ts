@@ -55,7 +55,7 @@ export const parseSchema = <TInput extends z.ZodType>(
 
   if (!parsed.success) {
     throw new ModelError(400, {
-      message: 'input-not-valid',
+      message: z.prettifyError(parsed.error),
     });
   }
 

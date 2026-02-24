@@ -31,6 +31,8 @@ describe(parseSchema.name, () => {
   it('parseSchema validates input and throws on invalid input', () => {
     const schema = z.string().min(1);
     expect(parseSchema(schema, 'hello')).toBe('hello');
-    expect(() => parseSchema(schema, '')).toThrow('input-not-valid');
+    expect(() => parseSchema(schema, '')).toThrow(
+      '✖ Too small: expected string to have >=1 characters'
+    );
   });
 });
