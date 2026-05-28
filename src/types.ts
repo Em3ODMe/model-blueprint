@@ -38,3 +38,8 @@ export type ProcedureMiddleware = (params: {
   ctx: unknown;
   input: unknown;
 }) => Promise<unknown> | unknown;
+
+export type GenericProcedureMiddleware<Context> = (params: {
+  ctx: Context;
+  input: unknown;
+}) => Promise<unknown> | unknown;
